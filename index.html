@@ -9,9 +9,44 @@
     <title>Cocktail Maker</title>
 </head>
 
-<body>
+<body class="">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-red-900 via-red-700 to-red-800 inset-x-0 top-0 p-3">
+        <!-- nav -->
+        <!-- MAYBE: drop downs for random ingredient and alphabet -->
+        <!-- TITLE -->
+        <h1 class="text-white text-2xl text-center font-bold">Cocktails & Dreams</h1>
+    </header>
+    <main>
+        <div>
+            <form id="search-form" action="">
+                <input id="search-input" type="text" placeholder="Search by...">
+                <select name="" id="dropdown-choice">
+                    <option value="cocktail">Cocktail Name</option>
+                    <option value="ingredient">Ingredient</option>
 
+                </select>
+                <button>Search!</button>
+            </form>
+        </div>
+
+        <div>
+            <h1>RESULTS:</h1>
+            <div id="drink-list"></div>
+        </div>
+
+        <!-- AFTER SEARCH: -->
+        <!-- Card for each result -->
+
+
+        <!-- Search random drink -->
+
+        <!-- MAYBE: search by alphabet letter -->
+    </main>
+    <!-- <footer class="bg-gradient-to-r from-red-900 via-red-700 to-red-800 inset-x-0 top-0 p-3">
+        Made by dork diaries
+    </footer> -->
 </body>
 <script src="./assets/javascript/script.js"></script>
 
-</html>
+</html>`
