@@ -40,7 +40,9 @@ function mainSearch(event) {
     });
 }
 
-/**************** This code block returns four drinks from the array of drinks ****************/
+/**************** TODO: This code block returns four drinks from the array of drinks ****************/
+
+// TODO: Create a function that returns drink name, category, image, and instructions
 
 // EVENT LISTENERS
 // init
