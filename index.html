@@ -17,26 +17,52 @@
         <!-- TITLE -->
         <h1 class="text-white text-2xl text-center font-bold">Cocktails & Dreams</h1>
     </header>
-    <main>
-        <div>
+    <main class="grid grid-cols-6 gap-4 justify-items-center">
+        <div class="col-start-2 col-span-4">
             <form id="search-form" action="">
                 <input id="search-input" type="text" placeholder="Search by...">
                 <select name="" id="dropdown-choice">
+                    <option value="no-select">please select an option</option>
                     <option value="cocktail">Cocktail Name</option>
                     <option value="ingredient">Ingredient</option>
 
                 </select>
-                <button>Search!</button>
+                <button class="border border-black p-1">Search!</button>
             </form>
         </div>
 
-        <div>
-            <h1>RESULTS:</h1>
+        <div class="col-start-2 col-span-4">
+            <h1 class="text-center">RESULTS:</h1>
             <div id="drink-list"></div>
+            <!-- AFTER SEARCH: -->
+            <!-- Card for each result -->
+            <!-- TO DELETE ONCE IN JS -->
+            <div class="flex flex-col border-2 border-red-700 w-60 p-1 bg-red-100 hidden">
+                <!-- Picture -->
+                <img src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg" alt="">
+                <!-- Drink Name -->
+                <h3 class="text-center font-bold text-lg">Margarita</h3>
+                <br>
+                <!-- List -->
+                <h4 class="">Ingredients:</h4>
+                <ul class="list-disc list-inside p-1 text-sm">
+                    <li>Tequila: 1 1/2 oz</li>
+                    <li>Triple Sec: 1/2 oz</li>
+                    <li>Lime Juice: 1 oz</li>
+                    <li>Salt</li>
+                </ul>
+                <br>
+                <h4 class="">Instructions:</h4>
+                <p class="text-sm">Rub the rim of the glass with the lime slice to make the salt stick to it. Take care
+                    to moisten only
+                    the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and
+                    never mix into the cocktail. Shake the other ingredients with ice, then carefully pour into the
+                    glass.</p>
+                <br>
+                <button class="bg-red-300 border border-black p-1 justify-center">Favorite!</button>
+            </div>
         </div>
 
-        <!-- AFTER SEARCH: -->
-        <!-- Card for each result -->
 
 
         <!-- Search random drink -->
