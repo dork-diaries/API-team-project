@@ -5,7 +5,7 @@ let searchInput = document.querySelector("#search-input");
 let drinkList = document.querySelector("#drink-list");
 let baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/";
 
-/*********************************** Search by Name ***********************************/
+/*********************************** Search by Name or Ingredient ***********************************/
 // FUNCTIONS
 function mainSearch(event) {
   event.preventDefault();
@@ -19,9 +19,9 @@ function mainSearch(event) {
     })
     .then(function (data) {
       console.log(data);
-    //   RANDOM INFO
-    //   let length = data.drinks.length;
-    //   let random = math.floor(math.random());
+      //   RANDOM INFO
+      //   let length = data.drinks.length;
+      //   let random = math.floor(math.random());
       data.drinks.slice(0, 10).forEach((drink) => {
         drinkList.innerHTML += `<div>${drink.strDrink}</div>`;
       });
