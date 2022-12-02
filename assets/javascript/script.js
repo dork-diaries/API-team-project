@@ -69,24 +69,23 @@ function mainSearch(event) {
           instructionsData = "";
         }
         console.log(ingredientsData);
-        //     drinkList.innerHTML += `<div class="flex flex-col border-2 border-red-700 w-60 p-1 bg-red-100">
-        //     <img src="${data.drinks[dIndex].strDrinkThumb}" alt="">
-        //     <h3 class="text-center font-bold text-lg">${data.drinks[dIndex].strDrink}</h3>
-        //     <br>
-        //     ${ingredientsData}
-        //     ${instructionsData}
-        //     <button class="bg-red-300 border border-black p-1 justify-center">Favorite!</button>
-        // </div>`;
-
-        drinkList.innerHTML += `<div>
-            <h4 style="font-size: 22px;">${data.drinks[dIndex].strDrink}</h4>
-            <p><img height="200" width="200" src="${data.drinks[dIndex].strDrinkThumb}"></p>
-            ${ingredientsData}
-            ${instructionsData}
-            </div>`;
+        
+        drinkList.innerHTML += `<div class="flex flex-col border-2 border-red-700 w-60 p-1 bg-red-100 m-2">
+        <img src="${data.drinks[dIndex].strDrinkThumb}" alt="">
+        <h3 class="text-center font-bold text-lg">${data.drinks[dIndex].strDrink}</h3>
+        <br>
+        <h4 class="">Ingredients:</h4>
+        <ul class="list-disc list-inside p-1 text-sm">
+        ${ingredientsData}
+        </ul>
+        <br>
+        ${instructionsData}
+        <br>
+        <button class="bg-red-300 border border-black p-1 justify-center">Favorite!</button>
+        </div>`;
       }
     });
-}
+}``
 
 // EVENT LISTENERS
 // init
