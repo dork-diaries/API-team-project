@@ -15,8 +15,8 @@
     <header class="bg-gradient-to-r from-red-900 via-red-700 to-red-800 inset-x-0 top-0 p-3">
         <!-- nav -->
         <nav>
-            <button>Home</button>
-            <button>Favorites</button>
+            <button onclick="mainSearchInit()">Home</button>
+            <button onclick="favoriteSearch()">Favorites</button>
             <select name="alphabet">
                 <option value="">Search by Alphabet</option>
                 <option value="">A</option>
@@ -52,27 +52,42 @@
         <!-- TITLE -->
         <h1 class="text-white text-2xl text-center font-bold">Cocktails & Dreams</h1>
     </header>
-    <main class="grid grid-cols-6 gap-4 justify-items-center">
-        <div class="col-start-2 col-span-4">
-            <form id="search-form" action="">
-                <input id="search-input" type="text" placeholder="Search by...">
-                <select name="" id="dropdown-choice">
-                    <!-- <option value="no-select">please select an option</option> -->
-                    <option value="cocktail">Cocktail Name</option>
-                    <option value="ingredient">Ingredient</option>
+    <main>
 
-                </select>
-                <button class="border border-black p-1">Search!</button>
-            </form>
+        <div class="flex flex-wrap flex-col justify-center items-center">
+            <div id="favoriteShow" class="w-full">
+                <h1 class="text-xl font-bold text-center">Favorites</h1>
+                <div class="container py-5 flex flex-wrap w-full px-10" id="saved">
+
+                </div>
+            </div>
+            <div class="col-start-2 col-span-4" id="mainShow">
+                <form id="search-form" action="">
+                    <input id="search-input" type="text" placeholder="Search by...">
+                    <select name="" id="dropdown-choice">
+                        <!-- <option value="no-select">please select an option</option> -->
+                        <option value="cocktail">Cocktail Name</option>
+                        <option value="ingredient">Ingredient</option>
+
+                    </select>
+                    <button class="border border-black p-1">Search!</button>
+                </form>
+            </div>
+
         </div>
 
-        <div class="col-start-2 col-span-4">
-            <h1 class="text-center">RESULTS:</h1>
+        <div class="col-start-2 col-span-4 w-full px-20">
+            <h1 class="text-xl font-bold text-center">RESULTS:</h1>
+            <div id="alert">
+
+            </div>
+
             <div id="drink-list"></div>
-            <!-- AFTER SEARCH: -->
-            <!-- Card for each result -->
-            <!-- TO DELETE ONCE IN JS -->
-            <!-- <div class="flex flex-col border-2 border-red-700 w-60 p-1 bg-red-100 hidden">
+        </div>
+        <!-- AFTER SEARCH: -->
+        <!-- Card for each result -->
+        <!-- TO DELETE ONCE IN JS -->
+        <!-- <div class="flex flex-col border-2 border-red-700 w-60 p-1 bg-red-100 hidden">
                 <img src="${data.drinks[dIndex].strDrinkThumb}" alt="">
                 <h3 class="text-center font-bold text-lg">${data.drinks[dIndex].strDrink}</h3>
                 <br>
@@ -81,8 +96,8 @@
                 <button class="bg-red-300 border border-black p-1 justify-center">Favorite!</button>
             </div>
         </div> -->
-            <!-- ORIGINAL -->
-            <div class="flex flex-col border-2 border-red-700 w-60 p-1 bg-red-100 hidden">
+        <!-- ORIGINAL -->
+        <!-- <div class="flex flex-col border-2 border-red-700 w-60 p-1 bg-red-100 hidden">
                 <img src="${data.drinks[dIndex].strDrinkThumb}" alt="">
                 <h3 class="text-center font-bold text-lg">${data.drinks[dIndex].strDrink}</h3>
                 <br>
@@ -94,8 +109,7 @@
                 ${instructionsData}
                 <br>`
                 <button class="bg-red-300 border border-black p-1 justify-center">Favorite!</button>
-            </div>
-        </div>
+            </div> -->
 
 
 

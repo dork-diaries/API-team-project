@@ -5,10 +5,14 @@ let dropdownChoice = document.querySelector("#dropdown-choice");
 let searchInput = document.querySelector("#search-input");
 let drinkList = document.querySelector("#drink-list");
 let baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/";
+let mainShow = document.getElementById("mainShow");
+let favoriteShow = document.getElementById("favoriteShow");
+let saved = document.getElementById("saved");
+let alerts = document.getElementById("alert");
 
 /*CODE BLOCK ENDS ⤴️: ***************** GLOBAL VARIABLES ***************** :⤴️ CODE BLOCK ENDS*/
 
-/*CODE BLOCK STARTS: *************** This code block returns drinks + image + ingredients + instructions *************** :⤵️ CODE BLOCK STARTS*/
+/*CODE BLOCK STARTS ⤵️: *************** This code block returns drinks + image + ingredients + instructions *************** :⤵️ CODE BLOCK STARTS*/
 
 // FUNCTIONS
 function mainSearch(event) {
