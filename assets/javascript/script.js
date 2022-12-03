@@ -208,5 +208,7 @@ function loadCocktails() {
 // EVENT LISTENERS
 // init
 searchForm.addEventListener("submit", mainSearch);
+loadCocktails();
+mainSearchInit();
 
 /*CODE BLOCK ENDS ⤴️: *************** This code block contains event listeners *************** :⤴️ CODE BLOCK ENDS*/
