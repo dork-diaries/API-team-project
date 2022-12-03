@@ -1,10 +1,15 @@
-// GLOBAL VARIABLES
+/*CODE BLOCK STARTS ⤵️: *************** GLOBAL VARIABLES *************** :⤵️ CODE BLOCK STARTS*/
+
 let searchForm = document.querySelector("#search-form");
 let dropdownChoice = document.querySelector("#dropdown-choice");
 let searchInput = document.querySelector("#search-input");
 let drinkList = document.querySelector("#drink-list");
 let baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/";
-/**************** This code block returns drinks + image + ingredients + instructions ****************/
+
+/*CODE BLOCK ENDS ⤴️: ***************** GLOBAL VARIABLES ***************** :⤴️ CODE BLOCK ENDS*/
+
+/*CODE BLOCK STARTS: *************** This code block returns drinks + image + ingredients + instructions *************** :⤵️ CODE BLOCK STARTS*/
+
 // FUNCTIONS
 function mainSearch(event) {
   event.preventDefault();
@@ -17,11 +22,11 @@ function mainSearch(event) {
       return response.json();
     })
     .then(function (data) {
-      let idUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+      let idUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="; // This is the base url for the drink id
       console.log(data.drinks);
       let indexes = [];
-      //   RANDOM INFO
-      //   This function returns a random drink from an array of drinks
+
+      // CODE CHUNK STARTS ⤵️: This function block returns a random drink from an array of drinks
       let randomDrink;
       let dIndex;
       let length = data.drinks.length;
@@ -30,23 +35,32 @@ function mainSearch(event) {
         if (!indexes.includes(randomDrink)) {
           indexes.push(randomDrink);
         }
-        if (indexes.length >= 4) {
+
+        if (indexes.length >= 1) {
+          // <== This numerical value sets the number of drinks that will return on screen
           break;
         }
       }
+      // CODE CHUNK ENDS ⤴️: This function block returns a random drink from an array of drinks
+
+      // CODE CHUNK STARS ⤵️: This code chunk grabs all details of a drink using ID
       let cocktail, d_id;
-      // TODO: Restrict the number of drinks displayed to x, using hide class
       for (let i = 0; i < indexes.length; i++) {
         dIndex = indexes[i];
         cocktail = data.drinks[dIndex];
-        // Getting all details of a drink using ID
         d_id = cocktail.idDrink;
         fetch(idUrl + d_id)
           .then((res) => res.json())
           .then((data) => displayData(data));
+        // CODE CHUNK ENDS ⤴️: This code chunk grabs all details of a drink using ID
       }
     });
 }
+
+/*CODE BLOCK ENDS ⤴️: *************** This code block returns drinks + image + ingredients + instructions *************** : ⤴️ CODE BLOCK ENDS*/
+
+/*CODE BLOCK STARTS ⤵️: *************** This code block returns ingredients + measurements *************** :⤵️ CODE BLOCK STARTS*/
+
 // This loop returns a random drink from an array of drinks along with the drink's ingredients paired with measurements, image, and instructions
 function displayData(data) {
   console.log(data);
@@ -54,6 +68,7 @@ function displayData(data) {
   let ingredients = [];
   let measures = [];
   let ingredientsData, instructionsData, ingred_measures;
+  // CODE CHUNK STARTS ⤵️: This function block pints the ingredients data from an array of drinks
   for (let k = 1; k <= 15; k++) {
     if (`strIngredient${k}` in drink && drink[`strIngredient${k}`] != null) {
       ingredients.push(drink[`strIngredient${k}`]);
@@ -61,7 +76,9 @@ function displayData(data) {
       break;
     }
   }
+  // CODE CHUNK ENDS ⤴️: This function block pints the ingredients data from an array of drinks
 
+  // CODE CHUNK STARTS ⤵️: This function block pints the measurement data from an array of drinks
   for (let a = 1; a <= 15; a++) {
     if (`strIngredient${a}` in drink && drink[`strMeasure${a}`] != null && drink[`strMeasure${a}`] != "") {
       measures.push(drink[`strMeasure${a}`]);
@@ -69,8 +86,10 @@ function displayData(data) {
       break;
     }
   }
-  // console.log(ingredients);
-  ingred_measures = `<ul>`;
+  // CODE CHUNK ENDS ⤴️: This function block pints the measurement data from an array of drinks
+
+  // CODE CHUNK STARTS ⤵️: This function block concatenates ingredients + measurement data from an array of drinks
+  ingred_measures = `<ul>`; // This is the start of the unordered list
   for (let b = 0; b < ingredients.length; b++) {
     if (measures[b] == null || measures[b] == undefined) {
       measures[b] = "";
@@ -82,13 +101,10 @@ function displayData(data) {
   } else {
     ingredientsData = "";
   }
+  ingred_measures += `</ul>`; // This line closes the <ul> tag
+  // CODE CHUNK ENDS ⤴️: This function block concatenates ingredients + measurement data from an array of drinks
 
-  ingred_measures += `</ul>`;
-  // if (measures.length != 0) {
-  //   ingred_measures = `<p><b>Measurements</b>: ${measures.join(", ")}</p>`;
-  // }else{
-  //   ingred_measures = '';
-  // }
+  // CODE CHUNK STARTS ⤵️: This function block prints the ingredients + measurement + instructions + image data to the screen
   if (drink.strInstructions !== undefined) {
     instructionsData = `<p><b>Instructions</b>: ${drink.strInstructions}</p>`;
   } else {
@@ -101,6 +117,14 @@ function displayData(data) {
   ${instructionsData}
   </div>`;
 }
+// CODE CHUNK ENDS ⤴️: This function block prints the ingredients + measurement + instructions + image data to the screen
+
+/*CODE BLOCK ENDS ⤴️: *************** This code block returns ingredients + measurements *************** :⤴️ CODE BLOCK ENDS*/
+
+/*CODE BLOCK STARTS ⤵️: *************** This code block contains event listeners *************** :⤵️ CODE BLOCK STARTS*/
+
 // EVENT LISTENERS
 // init
 searchForm.addEventListener("submit", mainSearch);
+
+/*CODE BLOCK ENDS ⤴️: *************** This code block contains event listeners *************** :⤴️ CODE BLOCK ENDS*/
