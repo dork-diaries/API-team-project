@@ -2,6 +2,7 @@
 
 let searchForm = document.querySelector("#search-form");
 let randomBtn = document.querySelector("#random-btn");
+let clearBtn = document.querySelector("#clear-btn");
 let dropdownChoice = document.querySelector("#dropdown-choice");
 let searchInput = document.querySelector("#search-input");
 let drinkList = document.querySelector("#drink-list");
@@ -18,7 +19,7 @@ let alphabets = document.getElementById("alphabets");
 
 // CODE CHUNK STARTS ⤵️: This function block fetches a random drink from an array of drinks
 function randomCocktail() {
-  const cocktailApi = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+  const cocktailApi = "https://www.thecocktaildb.com/api/json/v1/1/random.php"; // This is the base url for the random cocktail
   fetch(cocktailApi)
     .then((res) => res.json())
     .then(function (data) {
@@ -59,7 +60,7 @@ function mainSearch(event) {
       }
       // CODE CHUNK ENDS ⤴️: This function block returns a random drink from an array of drinks
 
-      // CODE CHUNK STARS ⤵️: This code chunk grabs all details of a drink using ID
+      // CODE CHUNK STARTS ⤵️: This code chunk grabs all details of a drink using ID
       let cocktail, d_id; // This is the name of the drink and the ID of the drink
       for (let i = 0; i < indexes.length; i++) {
         dIndex = indexes[i];
@@ -141,7 +142,7 @@ function displayData(data) {
   }
   drinkList.innerHTML += `<div>
   <h4 style="font-size: 22px;">${drink.strDrink}</h4>
-  <p><img height="200" width="200" src="${drink.strDrinkThumb}"></p>
+  // <p><img height="200" width="200" src="${drink.strDrinkThumb}"></p> 
   ${ingredientsData}
   ${instructionsData}
 
@@ -225,12 +226,13 @@ function loadCocktails() {
 
 // fetch list of cocktail by the first letter
 function listOfDrink(letter) {
+  drinkList.innerHTML = "";
   for (let i = 0; i <= 20; i++) {
     // Get Drink for Selected letter
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + letter)
       .then((response) => response.json())
       .then((data) => displayData(data))
-      .catch(() => console.log("Something went wrong, Please try again🙂"));
+      .catch(() => console.log("Something went wrong, Please try again"));
   }
 }
 
@@ -250,13 +252,24 @@ randomBtn.addEventListener("click", function () {
 });
 // CODE CHUNK ENDS ⤴️: This function block listens for a click on the Get Random Cocktail button
 
+// CODE CHUNK STARTS ⤵️: This function block listens for a click on the Clear Favorites button
+clearBtn.addEventListener("click", function () {
+  localStorage.removeItem("coctailName");
+  saved.innerHTML = "";
+});
+// CODE CHUNK ENDS ⤴️: This function block listens for a click on the Clear Favorites button
+
 searchForm.addEventListener("submit", mainSearch); // This event listener searches for cocktails
+
+// CODE CHUNK STARTS ⤵️: This function block listens for a click on the alphabet buttons
 alphabets.addEventListener("change", function () {
   // This event listener searches for cocktails by alphabet
   let letter = alphabets.value;
   // console.log(letter);
-  listOfDrink(letter); // This function fetches list of cocktails by alphabet letter
+  listOfDrink(letter); // This function block listens for a click on the alphabet buttons
 });
+// CODE CHUNK ENDS ⤴️: This function block listens for a click on the Clear Favorites button
+
 loadCocktails(); // This event listener loads all saved cocktails
 mainSearchInit(); // This event listener loads the main search page
 
