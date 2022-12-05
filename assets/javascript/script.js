@@ -5,6 +5,8 @@ let searchInput = document.querySelector("#search-input");
 let drinkList = document.querySelector("#drink-list");
 let baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/";
 let favoriteBtn = document.querySelector("#favorite-button");
+let Favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+let favoriteList = JSON.parse(localStorage.getItem("favorite-list")) || [];
 
 /**************** This code block returns drinks + image + ingredients + instructions ****************/
 
@@ -70,9 +72,21 @@ function mainSearch(event) {
     });
 }
 
-function addToFavorites(event) {
-  event.preventDefault;
+function addToFavorites() {
   console.log("button clicked");
+
+  fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      let currentFavorite = ("Margarita", "French 75");
+      // data.drinks.idDrink;
+      console.log(currentFavorite);
+      favoriteList.push(currentFavorite);
+      localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+    });
 }
 // EVENT LISTENERS
 // init
