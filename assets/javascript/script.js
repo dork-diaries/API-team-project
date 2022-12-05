@@ -63,7 +63,7 @@ function mainSearch(event) {
       // CODE CHUNK STARTS ⤵️: This code chunk grabs all details of a drink using ID
       let cocktail, d_id; // This is the name of the drink and the ID of the drink
       for (let i = 0; i < indexes.length; i++) {
-        dIndex = indexes[i];
+        dIndex = indexes[i]; // This is the index of the random drink
         cocktail = data.drinks[dIndex];
         d_id = cocktail.idDrink;
         fetch(idUrl + d_id) // This fetches the drink by ID
@@ -231,8 +231,7 @@ function listOfDrink(letter) {
     // Get Drink for Selected letter
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + letter)
       .then((response) => response.json())
-      .then((data) => displayData(data))
-      .catch(() => console.log("Something went wrong, Please try again"));
+      .then((data) => displayData(data));
   }
 }
 
