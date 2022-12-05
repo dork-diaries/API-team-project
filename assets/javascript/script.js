@@ -225,7 +225,7 @@ function loadCocktails() {
 /*CODE BLOCK STARTS ⤵️: *************** This code block fetches list of cocktails by alphabet letter *************** :⤵️ CODE BLOCK STARTS*/
 
 // fetch list of cocktail by the first letter
-function listOfDrink(letter) {
+function alphaDrink(letter) {
   drinkList.innerHTML = "";
   for (let i = 0; i <= 20; i++) {
     // Get Drink for Selected letter
@@ -264,8 +264,7 @@ searchForm.addEventListener("submit", mainSearch); // This event listener search
 alphabets.addEventListener("change", function () {
   // This event listener searches for cocktails by alphabet
   let letter = alphabets.value;
-  // console.log(letter);
-  listOfDrink(letter); // This function block listens for a click on the alphabet buttons
+  alphaDrink(letter); // This function block listens for a click on the alphabet buttons
 });
 // CODE CHUNK ENDS ⤴️: This function block listens for a click on the Clear Favorites button
 
