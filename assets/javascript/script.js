@@ -4,6 +4,7 @@ let dropdownChoice = document.querySelector("#dropdown-choice");
 let searchInput = document.querySelector("#search-input");
 let drinkList = document.querySelector("#drink-list");
 let baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/";
+let favoriteBtn = document.querySelector("#favorite-button");
 
 /**************** This code block returns drinks + image + ingredients + instructions ****************/
 
@@ -69,6 +70,12 @@ function mainSearch(event) {
     });
 }
 
+function addToFavorites(event) {
+  event.preventDefault;
+  console.log("button clicked");
+}
 // EVENT LISTENERS
 // init
 searchForm.addEventListener("submit", mainSearch);
+
+favoriteBtn.addEventListener("click", addToFavorites);
