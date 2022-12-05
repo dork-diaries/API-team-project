@@ -81,7 +81,7 @@ function addToFavorites() {
     })
     .then(function (data) {
       console.log(data);
-      let currentFavorite = ("Margarita", "French 75");
+      let currentFavorite = "Margarita";
       // data.drinks.idDrink;
       console.log(currentFavorite);
       favoriteList.push(currentFavorite);
