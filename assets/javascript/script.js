@@ -16,6 +16,17 @@ let alphabets = document.getElementById("alphabets");
 
 /*CODE BLOCK STARTS ⤵️: *************** This code block returns drinks + image + ingredients + instructions *************** :⤵️ CODE BLOCK STARTS*/
 
+// CODE CHUNK STARTS ⤵️: This function block fetches a random drink from an array of drinks
+function randomCocktail() {
+  const cocktailApi = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+  fetch(cocktailApi)
+    .then((res) => res.json())
+    .then(function (data) {
+      displayData(data);
+    });
+}
+// CODE CHUNK ENDS ⤴️: This function block fetches a random drink from an array of drinks
+
 function mainSearch(event) {
   event.preventDefault();
   drinkList.innerHTML = "";
@@ -229,6 +240,16 @@ function listOfDrink(letter) {
 
 // EVENT LISTENERS
 // init
+
+// CODE CHUNK STARTS ⤵️: This function block listens for a click on the Get Random Cocktail button
+randomBtn.addEventListener("click", function () {
+  drinkList.innerHTML = "";
+  for (let i = 0; i < 1; i++) {
+    randomCocktail();
+  }
+});
+// CODE CHUNK ENDS ⤴️: This function block listens for a click on the Get Random Cocktail button
+
 searchForm.addEventListener("submit", mainSearch); // This event listener searches for cocktails
 alphabets.addEventListener("change", function () {
   // This event listener searches for cocktails by alphabet
