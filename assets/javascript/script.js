@@ -1,6 +1,7 @@
 /*CODE BLOCK STARTS ⤵️: *************** GLOBAL VARIABLES *************** :⤵️ CODE BLOCK STARTS*/
 
 let searchForm = document.querySelector("#search-form");
+let randomBtn = document.querySelector("#random-btn");
 let dropdownChoice = document.querySelector("#dropdown-choice");
 let searchInput = document.querySelector("#search-input");
 let drinkList = document.querySelector("#drink-list");
