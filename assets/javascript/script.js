@@ -90,9 +90,9 @@ function getFavorites(id) {
 // CODE CHUNK ENDS ⤴️: This function fetches drinks by ID, then saves to favorites
 
 // This loop returns a random drink from an array of drinks along with the drink's ingredients paired with measurements, image, and instructions
-function displayData(data) {
+function displayData(data, i = 0) {
   console.log(data);
-  let drink = data.drinks[0]; // This is the drink object
+  let drink = data.drinks[i]; // This is the drink object
   let ingredients = []; // This is the array of ingredients
   let measures = []; // This is the array of measurements
   let ingredientsData, instructionsData, portions;
@@ -118,7 +118,8 @@ function displayData(data) {
   // CODE CHUNK ENDS ⤴️: This function block pints the measurement data from an array of drinks
 
   // CODE CHUNK STARTS ⤵️: This function block concatenates ingredients + measurement data from an array of drinks
-  portions = `<ul>`; // This is the start of the unordered list
+
+  portions = `<ul>`; // This line opens the <ul> tag
   for (let b = 0; b < ingredients.length; b++) {
     // This loop concatenates ingredients + measurement data from an array of drinks
     if (measures[b] == null || measures[b] == undefined) {
@@ -131,6 +132,7 @@ function displayData(data) {
   } else {
     ingredientsData = "";
   }
+
   portions += `</ul>`; // This line closes the <ul> tag
   // CODE CHUNK ENDS ⤴️: This function block concatenates ingredients + measurement data from an array of drinks
 
@@ -142,7 +144,7 @@ function displayData(data) {
   }
   drinkList.innerHTML += `<div>
   <h4 style="font-size: 22px;">${drink.strDrink}</h4>
-  // <p><img height="200" width="200" src="${drink.strDrinkThumb}"></p> 
+  <p><img height="200" width="200" src="${drink.strDrinkThumb}"></p> 
   ${ingredientsData}
   ${instructionsData}
 
@@ -226,12 +228,11 @@ function loadCocktails() {
 
 // fetch list of cocktail by the first letter
 function alphaDrink(letter) {
-  drinkList.innerHTML = "";
   for (let i = 0; i <= 20; i++) {
     // Get Drink for Selected letter
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + letter)
       .then((response) => response.json())
-      .then((data) => displayData(data));
+      .then((data) => displayData(data, i));
   }
 }
 
@@ -253,7 +254,7 @@ randomBtn.addEventListener("click", function () {
 
 // CODE CHUNK STARTS ⤵️: This function block listens for a click on the Clear Favorites button
 clearBtn.addEventListener("click", function () {
-  localStorage.removeItem("coctailName");
+  localStorage.removeItem("cocktailName");
   saved.innerHTML = "";
 });
 // CODE CHUNK ENDS ⤴️: This function block listens for a click on the Clear Favorites button
@@ -262,6 +263,7 @@ searchForm.addEventListener("submit", mainSearch); // This event listener search
 
 // CODE CHUNK STARTS ⤵️: This function block listens for a click on the alphabet buttons
 alphabets.addEventListener("change", function () {
+  drinkList.innerHTML = "";
   // This event listener searches for cocktails by alphabet
   let letter = alphabets.value;
   alphaDrink(letter); // This function block listens for a click on the alphabet buttons
