@@ -1,14 +1,15 @@
 /*CODE BLOCK STARTS ⤵️: *************** GLOBAL VARIABLES *************** :⤵️ CODE BLOCK STARTS*/
 
 let searchForm = document.querySelector("#search-form");
+let resultsCard = document.querySelector("#results-card");
 let randomBtn = document.querySelector("#random-btn");
 let clearBtn = document.querySelector("#clear-btn");
 let dropdownChoice = document.querySelector("#dropdown-choice");
 let searchInput = document.querySelector("#search-input");
 let drinkList = document.querySelector("#drink-list");
 let baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/";
-let mainShow = document.getElementById("mainShow");
-let favoriteShow = document.getElementById("favoriteShow");
+let mainShow = document.getElementById("main-show");
+let favoriteShow = document.getElementById("favorite-show");
 let saved = document.getElementById("saved");
 let alerts = document.getElementById("alert");
 let alphabets = document.getElementById("alphabets");
@@ -19,6 +20,7 @@ let alphabets = document.getElementById("alphabets");
 
 // CODE CHUNK STARTS ⤵️: This function block fetches a random drink from an array of drinks
 function randomCocktail() {
+  resultsCard.classList.remove("hidden");
   const cocktailApi = "https://www.thecocktaildb.com/api/json/v1/1/random.php"; // This is the base url for the random cocktail
   fetch(cocktailApi)
     .then((res) => res.json())
@@ -30,6 +32,7 @@ function randomCocktail() {
 
 function mainSearch(event) {
   event.preventDefault();
+  resultsCard.classList.remove("hidden");
   drinkList.innerHTML = "";
   let queryParam = dropdownChoice.value === "cocktail" ? `search.php?s=${searchInput.value}` : `filter.php?i=${searchInput.value}`;
   let requestUrl = `${baseUrl}${queryParam}`;
@@ -53,7 +56,7 @@ function mainSearch(event) {
           indexes.push(randomDrink);
         }
 
-        if (indexes.length >= 1) {
+        if (indexes.length >= 100) {
           // <== This numerical value sets the number of drinks that will return on screen
           break;
         }
@@ -91,6 +94,7 @@ function getFavorites(id) {
 
 // This loop returns a random drink from an array of drinks along with the drink's ingredients paired with measurements, image, and instructions
 function displayData(data, i = 0) {
+  resultsCard.classList.remove("hidden");
   console.log(data);
   let drink = data.drinks[i]; // This is the drink object
   let ingredients = []; // This is the array of ingredients
@@ -146,6 +150,7 @@ function displayData(data, i = 0) {
   <h4 style="font-size: 22px;">${drink.strDrink}</h4>
   <p><img height="200" width="200" src="${drink.strDrinkThumb}"></p> 
   ${ingredientsData}
+  <br>
   ${instructionsData}
 
   <button class="text-sm py-2 px-4 rounded bg-blue-400" onclick='saveCocktail("${drink.strDrink}")'>Add to Favorites</button> 
@@ -158,11 +163,13 @@ function displayData(data, i = 0) {
 /*CODE BLOCK STARTS ⤵️: *************** This code block saves retrievable cocktails to local storage *************** :⤵️ CODE BLOCK STARTS*/
 
 function favoriteSearch() {
+  resultsCard.classList.add("hidden");
   // This function searches for drinks in local storage
   mainShow.style.display = "none";
   favoriteShow.style.display = "block";
   drinkList.innerHTML = "";
 }
+``;
 function mainSearchInit() {
   favoriteShow.style.display = "none";
   mainShow.style.display = "block";
@@ -206,7 +213,6 @@ let saveCocktail = function (name) {
 // CODE CHUNK STARTS ⤵️: This function block displays all saved cocktails
 function loadCocktails() {
   saved.innerHTML = ""; // Clears everything in saved cocktails field
-
   if (dataStorage.length > 0) {
     // This if statement checks if there are any saved cocktails
     for (let i = 0; i < dataStorage.length; i++) {
@@ -228,6 +234,7 @@ function loadCocktails() {
 
 // fetch list of cocktail by the first letter
 function alphaDrink(letter) {
+  resultsCard.classList.remove("hidden");
   for (let i = 0; i <= 20; i++) {
     // Get Drink for Selected letter
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + letter)
@@ -256,6 +263,9 @@ randomBtn.addEventListener("click", function () {
 clearBtn.addEventListener("click", function () {
   localStorage.removeItem("cocktailName");
   saved.innerHTML = "";
+  drinkList.innerHTML = "";
+  resultsCard.classList.add("hidden");
+
 });
 // CODE CHUNK ENDS ⤴️: This function block listens for a click on the Clear Favorites button
 
@@ -274,3 +284,4 @@ loadCocktails(); // This event listener loads all saved cocktails
 mainSearchInit(); // This event listener loads the main search page
 
 /*CODE BLOCK ENDS ⤴️: *************** This code block contains event listeners *************** :⤴️ CODE BLOCK ENDS*/
+``
