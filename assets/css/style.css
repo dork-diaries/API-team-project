@@ -26,7 +26,7 @@ nav .nav-items>li{
     -ms-transition: ease-in-out 0.3s;
     -o-transition: ease-in-out 0.3s;
 }
-nav:hover .tracking-tight, nav ul>li:hover .neon-text {
+nav:hover .tracking-tight, button:hover, nav ul>li:hover .neon-text {
     color: #D76794;
     text-shadow: 0 0 10px rgba(215, 103, 148, 0.8);
 }
