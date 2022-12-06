@@ -60,7 +60,7 @@ function mainSearch(event) {
       }
     })
     .then(function (data) {
-      let idUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="; // This is the base url for the drink id
+      let idUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="; //? This is the base url for the drink id
       console.log(data); // This is the data returned from the API
       let indexes = [];
 
@@ -80,7 +80,7 @@ function mainSearch(event) {
           }
 
           if (indexes.length >= 100) {
-            //*? <== This numerical value sets the number of drinks that will return on screen
+            //*! <== This numerical value sets the number of drinks that will return on screen
             break;
           }
         }
@@ -124,7 +124,7 @@ function displayData(data, i = 0) {
   let ingredients = []; // This is the array of ingredients
   let measures = []; // This is the array of measurements
   let ingredientsData, instructionsData, portions;
-  // CODE CHUNK STARTS ⤵️: This function block pints the ingredients data from an array of drinks
+  //* CODE CHUNK STARTS ⤵️: This function block pints the ingredients data from an array of drinks
   for (let k = 1; k <= 15; k++) {
     if (`strIngredient${k}` in drink && drink[`strIngredient${k}`] != null) {
       ingredients.push(drink[`strIngredient${k}`]);
@@ -132,9 +132,9 @@ function displayData(data, i = 0) {
       break;
     }
   }
-  // * * CODE CHUNK ENDS ⤴️: This function block pints the ingredients data from an array of drinks
+  //* CODE CHUNK ENDS ⤴️: This function block pints the ingredients data from an array of drinks
 
-  // * * CODE CHUNK STARTS ⤵️: This function block pints the measurement data from an array of drinks
+  //* CODE CHUNK STARTS ⤵️: This function block pints the measurement data from an array of drinks
   for (let a = 1; a <= 15; a++) {
     // This loop prints the measurement data from an array of drinks
     if (`strIngredient${a}` in drink && drink[`strMeasure${a}`] != null && drink[`strMeasure${a}`] != "") {
@@ -178,7 +178,7 @@ function displayData(data, i = 0) {
   ${instructionsData}
 
   <button class="text-sm py-2 px-4 rounded bg-blue-400 text-white text-sm" onclick='saveCocktail("${drink.strDrink}")'>Add to Favorites</button> 
-  </div>`; // This onclick event saves the drink to favorites
+  </div>`; //*! This onclick event saves the drink to favorites
 }
 //* CODE CHUNK ENDS ⤴️: This function block prints the ingredients + measurement + instructions + image data to the screen
 
@@ -240,8 +240,8 @@ let removeCocktail = function (name) {
   if (dataStorage) {
     let index = dataStorage.indexOf(name); // This line finds the index of the cocktail name in local storage
     if (index > -1) {
-      // only splice array when item is found
-      dataStorage.splice(index, 1); // 2nd parameter means remove one item only
+      //*? only splice array when item is found
+      dataStorage.splice(index, 1); //*? 2nd parameter means remove one item only
     }
     localStorage.setItem("cocktailName", JSON.stringify(dataStorage));
     alerts.innerHTML = `<div class="p-3 bg-green-300 border-green-900 text-green-700 font-bold rounded">Cocktail removed!</div>`;
