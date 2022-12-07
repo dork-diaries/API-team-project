@@ -4,9 +4,10 @@
     }
 }
 body{
-    background: url('../images/bgLogo.jpg');
+    background-color: #000000;
+    background-image: url('../images/bgLogo.jpg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-attachment: fixed;
 }
@@ -26,11 +27,10 @@ nav .nav-items>li{
     -ms-transition: ease-in-out 0.3s;
     -o-transition: ease-in-out 0.3s;
 }
-nav:hover .tracking-tight, button:hover, nav ul>li:hover .neon-text {
+nav:hover .tracking-tight, nav ul>li:hover .neon-text {
     color: #D76794;
     text-shadow: 0 0 10px rgba(215, 103, 148, 0.8);
 }
-
 .instructions{
     cursor: pointer;
 }
@@ -58,16 +58,6 @@ backdrop-filter: blur(7.2px);
 -webkit-backdrop-filter: blur(7.2px);
 border: 1px solid rgba(255, 255, 255, 0.3);
 }
-
-.bg-glass-inner{
-    /* From https://css.glass */
-    background: rgba(157, 235, 255, 0.17);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(7.2px);
-    -webkit-backdrop-filter: blur(7.2px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    }
 .instructions:hover .text-down{
     display: block;
 }
