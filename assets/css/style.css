@@ -30,6 +30,7 @@ nav:hover .tracking-tight, button:hover, nav ul>li:hover .neon-text {
     color: #D76794;
     text-shadow: 0 0 10px rgba(215, 103, 148, 0.8);
 }
+
 .instructions{
     cursor: pointer;
 }
