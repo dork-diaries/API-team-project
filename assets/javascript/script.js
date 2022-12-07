@@ -262,10 +262,10 @@ function loadCocktails() {
   if (dataStorage.length > 0) {
     // This if statement checks if there are any saved cocktails
     for (let i = 0; i < dataStorage.length; i++) {
-      saved.innerHTML += `<div class="flex lg:w-1/4 md:w-4/12 sm:w-1/2 p-3 items-center>
+      saved.innerHTML += `<div class=" p-3 items-center>
       <div class="bg-blue-500 rounded">
-          <button class="bg-[#4895EF] hover:bg-[#4361EE] rounded py-3 px-7 font-bold text-white text-sm w-full" onclick="getFavorites('${dataStorage[i]}')">${dataStorage[i]}</button>
-          <button class="bg-red-500 p-2 text-sm font-medium rounded w-full hover:bg-red-600 text-white" onclick="removeCocktail('${dataStorage[i]}')">Remove</button>
+          <button class="bg-[#4895EF] hover:bg-[#4361EE] py-1 px-7 font-bold text-white text-sm w-full h-14" onclick="getFavorites('${dataStorage[i]}')">${dataStorage[i]}</button>
+          <button class="bg-red-500 p-2 text-sm font-medium w-full hover:bg-red-600 text-white" onclick="removeCocktail('${dataStorage[i]}')">Remove</button>
       </div>
   </div>`;
     }
