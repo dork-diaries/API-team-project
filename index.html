@@ -60,10 +60,11 @@
 
     <main>
         <div class="flex flex-wrap flex-col justify-center items-center">
-            <div id="favorite-show" class="w-full">
-                <h1 class="text-xl font-bold text-center">Favorites</h1>
+            <div id="favorite-show" class="w-full">`
+                <h1 class="text-3xl text-white font-bold text-center pb-2">Favorites</h1>
                 <div class="text-center">
-                    <button class="border border-black p-1" id="clear-btn">Clear Favorites</button>
+                    <button class="border-2 border-[#4895EF] text-black text-sm p-3 bg-[#ffc8dd]" id="clear-btn">Clear
+                        Favorites</button>
                 </div>
                 <div class="container py-5 flex flex-wrap w-full px-10" id="saved">
 
@@ -75,8 +76,7 @@
                 </h1>
             </div>
             <!-- SEARCH FORM -->
-            <div class="col-start-2 col-span-4 bg-glass border-2 border-sky-400 w-full mx-auto lg:w-4/12 md:w-1/2 sm:w-8/12 p-5"
-                id="main-show">
+            <div class="col-start-2 col-span-4 bg-glass border-2 border-sky-400 w-8/12 mx-auto p-5" id="main-show">
                 <div>
                     <form id="search-form" action="">
                         <div class="flex items-center border-b border-[#4895EF] py-3">
@@ -102,14 +102,14 @@
             </div>
 
             <div id="results-card"
-                class="hidden col-start-2 col-span-4 bg-glass border-2 border-sky-400 w-full mx-auto lg:w-4/12 md:w-1/2 sm:w-8/12 m-5 p-5">
-                <div class="col-start-2 col-span-4 w-full px-20 text-[#3F37C9]">
-                    <span class="text-xl font-bold text-center">RESULTS:</span>
+                class="hidden col-start-2 col-span-4 bg-glass border-2 border-sky-400 w-8/12 mx-auto m-5 p-5">
+                <div class="flex flex-col items-center col-start-2 col-span-4 w-full px-2 text-[#3F37C9]">
+                    <span class="text-xl font-bold text-center pb-2">RESULTS:</span>
                     <div id="alert">
 
                     </div>
 
-                    <div id="drink-list"></div>
+                    <div class="w-full max-w-sm" id="drink-list"></div>
                 </div>
             </div>
             <!-- AFTER SEARCH: -->

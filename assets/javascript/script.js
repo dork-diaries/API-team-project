@@ -123,16 +123,16 @@ function displayData(data, i = 0) {
 
   // CODE CHUNK STARTS ⤵️: This function block concatenates ingredients + measurement data from an array of drinks
 
-  portions = `<ul>`; // This line opens the <ul> tag
+  portions = `<ul class="list-disc list-inside p-1 text-sm">`; // This line opens the <ul> tag
   for (let b = 0; b < ingredients.length; b++) {
     // This loop concatenates ingredients + measurement data from an array of drinks
     if (measures[b] == null || measures[b] == undefined) {
       measures[b] = "";
     }
-    portions += `<li>${ingredients[b]} - ${measures[b]}</li>`; // This concatenates the ingredients and measurements
+    portions += `<li class="pl-4">${ingredients[b]} - ${measures[b]}</li>`; // This concatenates the ingredients and measurements
   }
   if (ingredients.length != 0) {
-    ingredientsData = `<p><b>Ingredients</b>: ${portions}</p>`; // This concatenates the ingredients and measurements
+    ingredientsData = `<p class="text-sm"><b>Ingredients</b>: ${portions}</p>`; // This concatenates the ingredients and measurements
   } else {
     ingredientsData = "";
   }
@@ -142,18 +142,19 @@ function displayData(data, i = 0) {
 
   // CODE CHUNK STARTS ⤵️: This function block prints the ingredients + measurement + instructions + image data  (with save button) to the screen
   if (drink.strInstructions !== undefined) {
-    instructionsData = `<p><b>Instructions</b>: ${drink.strInstructions}</p>`;
+    instructionsData = `<p class="px-2 pb-2 text-sm"><b>Instructions</b>: ${drink.strInstructions}</p>`;
   } else {
     instructionsData = "";
   }
-  drinkList.innerHTML += `<div>
-  <h4 style="font-size: 22px;">${drink.strDrink}</h4>
-  <p><img height="200" width="200" src="${drink.strDrinkThumb}"></p> 
+  drinkList.innerHTML += `<div class="border-2 border-[#3F37C9] bg-glass-inner my-2 flex flex-col items-center">
+  <h4 class="font-bold text-lg p-1">${drink.strDrink}</h4>
+  <p><img class="border border-[#3F37C9] m-1 mb-2" height="200" width="200" src="${drink.strDrinkThumb}"></p> 
   ${ingredientsData}
   <br>
   ${instructionsData}
-
-  <button class="text-sm py-2 px-4 rounded bg-blue-400" onclick='saveCocktail("${drink.strDrink}")'>Add to Favorites</button> 
+  <div class="flex flex-col items-center">
+  <button class="text-sm m-1 py-2 px-4 rounded bg-blue-400 place-self-center" onclick='saveCocktail("${drink.strDrink}")'>Add to Favorites</button> 
+  </div>
   </div>`; // This onclick event saves the drink to favorites
 }
 // CODE CHUNK ENDS ⤴️: This function block prints the ingredients + measurement + instructions + image data to the screen
@@ -216,8 +217,8 @@ function loadCocktails() {
   if (dataStorage.length > 0) {
     // This if statement checks if there are any saved cocktails
     for (let i = 0; i < dataStorage.length; i++) {
-      saved.innerHTML += `<div class="lg:w-1/4 md:w-4/12 sm:w-1/2 p-3">
-            <button class="bg-red-500 rounded py-3 px-7 hover:bg-red-600 font-bold text-white w-full" onclick="getFavorites('${dataStorage[i]}')">${dataStorage[i]}</button>
+      saved.innerHTML += `<div class="flex lg:w-1/4 md:w-4/12 sm:w-1/2 p-3 items-center">
+            <button class="bg-[#4895EF] hover:bg-[#4361EE] rounded py-3 px-7 font-bold text-white text-sm w-full" onclick="getFavorites('${dataStorage[i]}')">${dataStorage[i]}</button>
         </div>`;
     }
   } else {
@@ -265,7 +266,6 @@ clearBtn.addEventListener("click", function () {
   saved.innerHTML = "";
   drinkList.innerHTML = "";
   resultsCard.classList.add("hidden");
-
 });
 // CODE CHUNK ENDS ⤴️: This function block listens for a click on the Clear Favorites button
 
@@ -284,4 +284,4 @@ loadCocktails(); // This event listener loads all saved cocktails
 mainSearchInit(); // This event listener loads the main search page
 
 /*CODE BLOCK ENDS ⤴️: *************** This code block contains event listeners *************** :⤴️ CODE BLOCK ENDS*/
-``
+``;
