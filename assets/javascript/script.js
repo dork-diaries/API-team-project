@@ -66,7 +66,7 @@ function mainSearch(event) {
 
       if (data === null || data.drinks === null) {
         drinkList.innerHTML = `<img src="https://media.tenor.com/KOZLvzU0o4kAAAAC/no-results.gif" alt="NOT Found" class="w-full my-3">`;
-        drinkList.innerHTML += `<div class="p-2 bg-red-300 border-red-900 text-red-700 font-bold rounded">No cocktails found!</div>`;
+        drinkList.innerHTML += `<div class="p-2 bg-red-300 border-red-900 text-red-700 font-bold rounded w-full">No cocktails found!</div>`;
       } else {
         //* CODE CHUNK STARTS ⤵️: This function block returns a random drink from an array of drinks
         let randomDrink;
@@ -84,22 +84,6 @@ function mainSearch(event) {
           }
         }
 
-        let num = 0;
-        totalText.innerHTML = ``;
-        filter.innerHTML = `<option value="All" selected>All</option>`;
-        for (let a = 0; a <= indexes.length; a += 10) {
-          if (a > indexes.length || a + 10 > indexes.length) {
-            num = indexes.length;
-          } else if (a == 0) {
-            num = 5;
-          } else {
-            num = a;
-          }
-          filter.innerHTML += `<option value="${num}">${num}</option>`;
-        }
-        document.getElementById("filter-cont").style.display = "flex"; //*! This displays the filter
-        filter.style.display = "block";
-        totalText.innerHTML = `${indexes.length} Drinks Found!`;
         //* CODE CHUNK ENDS ⤴️: This function block returns a random drink from an array of drinks
 
         //* CODE CHUNK STARTS ⤵️: This code chunk grabs all details of a drink using ID
@@ -114,6 +98,23 @@ function mainSearch(event) {
           //* CODE CHUNK ENDS ⤴️: This code chunk grabs all details of a drink using ID
         }
       }
+      
+      let num = 0;
+      totalText.innerHTML = ``;
+      filter.innerHTML = `<option value="All" selected>All</option>`;
+      for (let a = 0; a <= indexes.length; a += 10) {
+        if (a > indexes.length || a + 10 > indexes.length) {
+          num = indexes.length;
+        } else if (a == 0) {
+          num = 5;
+        } else {
+          num = a;
+        }
+        filter.innerHTML += `<option value="${num}">${num}</option>`;
+      }
+      document.getElementById("filter-cont").style.display = "flex"; //*! This displays the filter
+      filter.style.display = "block";
+      totalText.innerHTML = `${indexes.length} Drinks Found!`;
     });
 }
 
@@ -191,7 +192,7 @@ function displayData(data, i = 0) {
   } else {
     instructionsData = "";
   }
-  drinkList.innerHTML += `<div class="border-2 border-[#3F37C9] bg-glass-inner my-2 flex flex-col items-center">
+  drinkList.innerHTML += `<div class="border-2 border-[#3F37C9] bg-glass-inner my-2 flex flex-col items-center item">
   <h4 class="font-bold text-lg p-1">${drink.strDrink}</h4>
   <p><img class="border border-[#3F37C9] m-1 mb-2" height="200" width="200" src="${drink.strDrinkThumb}"></p> 
   ${ingredientsData}
