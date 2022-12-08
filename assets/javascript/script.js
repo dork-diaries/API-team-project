@@ -98,7 +98,7 @@ function mainSearch(event) {
           //* CODE CHUNK ENDS ⤴️: This code chunk grabs all details of a drink using ID
         }
       }
-      
+
       let num = 0;
       totalText.innerHTML = ``;
       filter.innerHTML = `<option value="All" selected>All</option>`;
@@ -193,13 +193,17 @@ function displayData(data, i = 0) {
     instructionsData = "";
   }
   drinkList.innerHTML += `<div class="border-2 border-[#3F37C9] bg-glass-inner my-2 flex flex-col items-center item">
+  <div class="flex flex-col items-center">
   <h4 class="font-bold text-lg p-1">${drink.strDrink}</h4>
   <p><img class="border border-[#3F37C9] m-1 mb-2" height="200" width="200" src="${drink.strDrinkThumb}"></p> 
+  
   ${ingredientsData}
+  </div>
   <br>
   ${instructionsData}
 <div class="flex flex-col items-center">
   <button class="text-sm m-1 py-2 px-4 rounded bg-blue-400 place-self-center" onclick='saveCocktail("${drink.strDrink}")'>Add to Favorites</button> 
+</div>
   </div>`; // This onclick event saves the drink to favorites
 }
 //* CODE CHUNK ENDS ⤴️: This function block prints the ingredients + measurement + instructions + image data to the screen
