@@ -1,9 +1,10 @@
-@media (max-width: 768px) {
-    #menu{
-        display: none;
-    }
+/* @import url('../font/santafe.ttf'); */
+@font-face {
+    font-family: 'santa-fe';
+    src: url(../font/santafe.ttf);
 }
-body{
+
+body {
     background-color: #000000;
     background-image: url('../images/bgLogo.jpg');
     background-repeat: no-repeat;
@@ -11,30 +12,77 @@ body{
     background-position: center;
     background-attachment: fixed;
 }
+
+.logo {
+    font-size: 36px;
+    font-family: 'santa-fe', sans-serif;
+    color: #fff;
+    text-shadow: 
+    0 0 1px #f09,
+    0 0 6px #f09,
+    0 0 10px #f09;
+    animation: pulsate 1s ease-in-out infinite;
+    -webkit-animation: pulsate 1s ease-in-out infinite;
+}
+
+@keyframes pulsate {
+
+    100% {
+
+        text-shadow:
+            0 0 1px #f09,
+            0 0 6px #f09,
+            0 0 10px #f09;
+
+    }
+
+    0% {
+
+        text-shadow:
+            0 0 2px #f09,
+            0 0 4px #f09,
+            0 0 8px #f09;
+
+    }
+}
+
 nav {
     border-radius: 0 0 50px 50px;
     background-color: #0A0A0A;
     border-bottom: 2px solid #D76794;
     box-shadow: 0 0 20px rgba(215, 103, 148, 0.5);
-  }
-nav .nav-items>li{
+}
+
+nav .nav-items>li {
     display: inline-block;
 }
-.neon-text{
+
+.neon-text {
     transition: ease-in-out 0.3s;
     -webkit-transition: ease-in-out 0.3s;
     -moz-transition: ease-in-out 0.3s;
     -ms-transition: ease-in-out 0.3s;
     -o-transition: ease-in-out 0.3s;
 }
-nav:hover .tracking-tight, button:hover, nav ul>li:hover .neon-text {
+
+nav:hover .tracking-tight,
+button:hover,
+nav ul>li:hover .neon-text {
     color: #D76794;
     text-shadow: 0 0 10px rgba(215, 103, 148, 0.8);
 }
-.instructions{
+
+#filterResults{
+    display: none;
+}
+.text-nowrap{
+    white-space: nowrap;
+}
+.instructions {
     cursor: pointer;
 }
-.text-down{
+
+.text-down {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -49,30 +97,36 @@ nav:hover .tracking-tight, button:hover, nav ul>li:hover .neon-text {
     -ms-transition: ease-in-out 0.5s;
     -o-transition: ease-in-out 0.5s;
 }
-.bg-glass{
-/* From https://css.glass */
-background: rgba(255, 255, 255, 0.69);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(7.2px);
--webkit-backdrop-filter: blur(7.2px);
-border: 1px solid rgba(255, 255, 255, 0.3);
+
+.bg-glass {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.69);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.2px);
+    -webkit-backdrop-filter: blur(7.2px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
-.instructions:hover .text-down{
+
+.instructions:hover .text-down {
     display: block;
 }
-.alphabets{
+
+.alphabets {
     cursor: pointer;
 }
-.inp_neon{
-    border-bottom: 2px solid #D76794  !important;
+
+.inp_neon {
+    border-bottom: 2px solid #D76794 !important;
 }
-.btn-neon{
+
+.btn-neon {
     background-color: #0A0A0A;
     border: 2px solid #D76794;
     box-shadow: 0 0 20px rgba(215, 103, 148, 0.5);
 }
-.title{
+
+.title {
     text-transform: uppercase;
     font-size: 40px;
     color: #fff;
@@ -81,19 +135,35 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     text-shadow: 0 2px 10px rgb(248 27 226);
 }
 
-#menu-btn img{
+#menu-btn img {
     height: 16px !important;
 }
 
-#close{
+#close {
     display: none;
 }
-#menu{
+
+#menu {
     display: none;
 }
+
+#filter-cont{
+    display: none;
+}
+
 @media (min-width: 768px) {
-    
-#menu{
-    display: flex !important;
+
+    #menu {
+        display: flex !important;
+    }
 }
+
+@media (max-width: 768px) {
+    #menu {
+        display: none;
+    }
+
+    .logo {
+        font-size: 30px;
+    }
 }

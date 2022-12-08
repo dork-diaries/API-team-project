@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Cocktails & Dreams</title>
+    <title>Cocktail Maker</title>
 </head>
 
 <body class="">
@@ -19,7 +19,7 @@
                 <nav class="flex items-center justify-between flex-wrap p-6">
                     <!-- TITLE -->
                     <div class="font-semibold text-xl tracking-tight">
-                        <a href="./index.html"> <span class="neon-text">Cocktails & Dreams</span></a>
+                        <a href="./index.html"> <span class="logo">Cocktails & Dreams</span></a>
                     </div>
                     <div class="block md:hidden" id="menu-btn">
                         <button class="flex items-center px-3 py-2 border rounded border-[#4895EF]" id="bars"
@@ -75,7 +75,7 @@
             </header>
 
             <main class="p-3 md:p-5">
-                <div class="flex flex-wrap flex-col justify-center items-center mt-20 pt-10">
+                <div class="flex flex-wrap flex-col justify-center items-center mt-20 py-10">
                     <div id="alert" class="w-full my-3 px-10">
                     </div>
                     <div id="favorite-show" class="col-start-2 col-span-4 bg-glass border-2 border-sky-400 mx-auto p-2">
@@ -91,17 +91,17 @@
                         <h1 class="text-center title my-10"> Search Cocktails </h1>
                     </div>
                     <!-- SEARCH FORM -->
-                    <div class="col-start-2 col-span-4 bg-glass border-2 border-sky-400 w-8/12 mx-auto min-w-fit p-5"
+                    <div class="col-start-2 col-span-4 bg-glass border-2 border-sky-400 sm:w-8/12 w-full mx-auto min-w-fit p-5"
                         id="main-show">
                         <div>
                             <form id="search-form" action="">
-                                <div class="flex flex-wrap items-center justify-between border-b border-[#4895EF] py-3">
+                                <div
+                                    class="flex sm:flex-row flex-col items-center justify-between border-0 sm:border-b sm:border-[#4895EF] py-3">
                                     <input
-                                        class="appearance-none bg-transparent border-none lg:w-full sm:max-w-xs text-black-700 py-1 px-1 leading-tight focus:outline-none placeholder:text-black"
-                                        id="search-input" type="text" placeholder="Search by...">
-                                    <div>
-                                        <select class=" bg-[#ffc8dd] py-2 rounded shadow-lg" name=""
-                                            id="dropdown-choice">
+                                        class="appearance-none border-b border-[#4895EF] bg-transparent sm:mb-0 mb-5 sm:border-none w-full lg:w-full sm:max-w-xs text-black-700 py-1 px-1 leading-tight focus:outline-none placeholder:text-black"
+                                        id="search-input" type="text" placeholder="Type here...">
+                                    <div class="flex">
+                                        <select class=" bg-[#ffc8dd] py-2 rounded shadow-lg" id="dropdown-choice">
                                             <option value="cocktail">Cocktail Name</option>
                                             <option value="ingredient">Ingredient</option>
                                         </select>
@@ -121,14 +121,28 @@
                         class="hidden col-start-2 col-span-4 bg-glass border-2 border-sky-400 w-8/12 mx-auto min-w-fit m-3 p-2">
                         <div class="flex flex-col items-center col-start-2 col-span-4 w-full px-2 text-[#3F37C9]">
                             <span class="text-xl font-bold text-center pb-2">RESULTS:</span>
-                            <div class="w-full max-w-sm flex flex-wrap lg:flex-row" id="drink-list"></div>
+                            <div class="w-full flex flex-wrap">
+                                <div class="ml-auto md:w-1/2 w-full flex items-center" id="filter-cont">
+                                    <label for="filterResults" class="text-nowrap">Filter results:</label>
+                                    <select name="filterResults" id="filterResults" onchange="filerResults()"
+                                        class="w-full px-2 my-2 md:my-0 ml-3 text-black bg-glass">
+                                        <option value="" selected disabled>No results!</option>
+                                    </select>
+                                </div>
+                                <div class="ml-auto md:w-1/2 w-full">
+                                    <p id="totalText" class="font-semibold text-center"></p>
+                                </div>
+                            </div>
+                            <div class="w-full max-w-sm flex flex-wrap lg:flex-row items mt-10" id="drink-list"></div>
                         </div>
                     </div>
                 </div>
             </main>
         </div>
         <footer class="bg-black border-t-2 border-red-300 absolute h-10 inset-x-0 bottom-0 text-white text-center pt-1">
-            <p>Brought to you by the Dork Diaries.</p>
+            <p style="text-align: center"> Copyright &copy;
+                <script>document.write(new Date().getFullYear())</script> Brought to you by the Dork Diaries.
+            </p>
         </footer>
     </div>
 </body>
