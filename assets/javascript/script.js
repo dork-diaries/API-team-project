@@ -16,6 +16,8 @@ let alphabets = document.getElementById("alphabets");
 let menu = document.getElementById("menu");
 let menu_open = document.getElementById("bars");
 let menu_close = document.getElementById("close");
+let filter = document.getElementById("filterResults");
+let totalText = document.getElementById("totalText");
 
 /*CODE BLOCK ENDS ⤴️: ***************** GLOBAL VARIABLES ***************** :⤴️ CODE BLOCK ENDS*/
 
@@ -42,15 +44,13 @@ function mainSearch(event) {
   console.log(requestUrl);
   fetch(requestUrl)
     .then(function (response) {
-      let rtnData; // This is the data returned from the API
+      let rtnData;
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.indexOf("application/json") !== -1) {
-        // This checks if the response is JSON
         rtnData = response.json();
-        console.log(rtnData);
+        // console.log(rtnData);
         if (rtnData.drinks !== null) {
-          // This checks if the response is not null
-          return rtnData;
+          return rtnData; // This returns the data if it is not null
         } else {
           return null;
         }
@@ -60,30 +60,46 @@ function mainSearch(event) {
       }
     })
     .then(function (data) {
-      let idUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="; //? This is the base url for the drink id
-      console.log(data); // This is the data returned from the API
+      let idUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="; // This is the base url for the drink id
+      // console.log(data);
       let indexes = [];
 
       if (data === null || data.drinks === null) {
-        // This checks if the response is null
         drinkList.innerHTML = `<img src="https://media.tenor.com/KOZLvzU0o4kAAAAC/no-results.gif" alt="NOT Found" class="w-full my-3">`;
         drinkList.innerHTML += `<div class="p-2 bg-red-300 border-red-900 text-red-700 font-bold rounded">No cocktails found!</div>`;
       } else {
-        //** CODE CHUNK STARTS ⤵️: This function block returns a random drink from an array of drinks
+        //* CODE CHUNK STARTS ⤵️: This function block returns a random drink from an array of drinks
         let randomDrink;
         let dIndex; // This is the index of the random drink
         let length = data.drinks.length; // This is the length of the array of drinks
+
         for (let j = 0; j < length; j++) {
           randomDrink = Math.floor(Math.random() * length);
           if (!indexes.includes(randomDrink)) {
             indexes.push(randomDrink);
           }
-
           if (indexes.length >= 100) {
             //*! <== This numerical value sets the number of drinks that will return on screen
             break;
           }
         }
+
+        let num = 0;
+        totalText.innerHTML = ``;
+        filter.innerHTML = `<option value="All" selected>All</option>`;
+        for (let a = 0; a <= indexes.length; a += 10) {
+          if (a > indexes.length || a + 10 > indexes.length) {
+            num = indexes.length;
+          } else if (a == 0) {
+            num = 5;
+          } else {
+            num = a;
+          }
+          filter.innerHTML += `<option value="${num}">${num}</option>`;
+        }
+        document.getElementById("filter-cont").style.display = "flex"; //*! This displays the filter
+        filter.style.display = "block";
+        totalText.innerHTML = `${indexes.length} Drinks Found!`;
         //* CODE CHUNK ENDS ⤴️: This function block returns a random drink from an array of drinks
 
         //* CODE CHUNK STARTS ⤵️: This code chunk grabs all details of a drink using ID
@@ -105,10 +121,15 @@ function mainSearch(event) {
 
 /*CODE BLOCK STARTS ⤵️: *************** This code block returns ingredients + measurements *************** :⤵️ CODE BLOCK STARTS*/
 
-// CODE CHUNK STARTS ⤵️: This function fetches drinks by ID, then saves to favorites
+//* CODE CHUNK STARTS ⤵️: This function fetches drinks by ID, then saves to favorites
 function getFavorites(id) {
   // This function fetches drinks by ID, then saves to favorites
   drinkList.innerHTML = "";
+  //*! This hides the drink to the favorites list
+  document.getElementById("filter-cont").style.display = "none";
+  filter.style.display = "none";
+  totalText.innerHTML = ``;
+  totalText.innerHTML = "";
   let idUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
   fetch(idUrl + id)
     .then((res) => res.json())
@@ -119,14 +140,14 @@ function getFavorites(id) {
 // This loop returns a random drink from an array of drinks along with the drink's ingredients paired with measurements, image, and instructions
 function displayData(data, i = 0) {
   resultsCard.classList.remove("hidden");
-  console.log(data);
+  // console.log(data);
   let drink = data.drinks[i]; // This is the drink object
   let ingredients = []; // This is the array of ingredients
   let measures = []; // This is the array of measurements
   let ingredientsData, instructionsData, portions;
   //* CODE CHUNK STARTS ⤵️: This function block pints the ingredients data from an array of drinks
   for (let k = 1; k <= 15; k++) {
-    if (`strIngredient${k}` in drink && drink[`strIngredient${k}`] != null) {
+    if (drink[`strIngredient${k}`] != null && drink[`strIngredient${k}`] != undefined && `strIngredient${k}` in drink) {
       ingredients.push(drink[`strIngredient${k}`]);
     } else {
       break;
@@ -147,16 +168,16 @@ function displayData(data, i = 0) {
 
   //* CODE CHUNK STARTS ⤵️: This function block concatenates ingredients + measurement data from an array of drinks
 
-  portions = `<ul class="list-disc list-inside p-1 text-sm">`; // This line opens the <ul> tag
+  portions = `<ul>`; // This line opens the <ul> tag
   for (let b = 0; b < ingredients.length; b++) {
     // This loop concatenates ingredients + measurement data from an array of drinks
     if (measures[b] == null || measures[b] == undefined) {
       measures[b] = "";
     }
-    portions += `<li class="pl-4">${ingredients[b]} - ${measures[b]}</li>`; // This concatenates the ingredients and measurements
+    portions += `<li>${ingredients[b]} - ${measures[b]}</li>`; // This concatenates the ingredients and measurements
   }
   if (ingredients.length != 0) {
-    ingredientsData = `<p class="text-sm"><b>Ingredients</b>: ${portions}</p>`; // This concatenates the ingredients and measurements
+    ingredientsData = `<p><b>Ingredients</b>: ${portions}</p>`; // This concatenates the ingredients and measurements
   } else {
     ingredientsData = "";
   }
@@ -166,19 +187,18 @@ function displayData(data, i = 0) {
 
   //* CODE CHUNK STARTS ⤵️: This function block prints the ingredients + measurement + instructions + image data  (with save button) to the screen
   if (drink.strInstructions !== undefined) {
-    instructionsData = `<p class="px-2 pb-2 text-sm"><b>Instructions</b>: ${drink.strInstructions}</p>`;
+    instructionsData = `<p><b>Instructions</b>: ${drink.strInstructions}</p>`;
   } else {
     instructionsData = "";
   }
-  drinkList.innerHTML += `<div class="border-2 border-[#3F37C9] bg-glass-inner my-2 flex flex-col items-center">
-  <h4 class="font-bold text-lg p-1">${drink.strDrink}</h4>
-  <p><img class="border border-[#3F37C9] m-1 mb-2" height="200" width="200" src="${drink.strDrinkThumb}"></p> 
+  drinkList.innerHTML += `<div class="item my-5">
+  <h4 class="text-2xl font-bold mb-3">${drink.strDrink}</h4>
+  <p><img height="200" width="200" src="${drink.strDrinkThumb}"></p> 
   ${ingredientsData}
   <br>
   ${instructionsData}
-  <div class="flex flex-col items-center">
-  <button class="text-sm m-1 py-2 px-4 rounded bg-blue-400 place-self-center" onclick='saveCocktail("${drink.strDrink}")'>Add to Favorites</button> 
-  </div>
+
+  <button class="text-sm py-2 px-4 rounded bg-blue-400 text-white text-sm" onclick='saveCocktail("${drink.strDrink}")'>Add to Favorites</button> 
   </div>`; // This onclick event saves the drink to favorites
 }
 //* CODE CHUNK ENDS ⤴️: This function block prints the ingredients + measurement + instructions + image data to the screen
@@ -186,6 +206,19 @@ function displayData(data, i = 0) {
 /*CODE BLOCK ENDS ⤴️: *************** This code block returns ingredients + measurements *************** :⤴️ CODE BLOCK ENDS*/
 
 /*CODE BLOCK STARTS ⤵️: *************** This code block saves retrievable cocktails to local storage *************** :⤵️ CODE BLOCK STARTS*/
+function filerResults() {
+  let num = document.getElementById("filterResults").value;
+  let item = document.querySelectorAll(".items .item");
+  for (let k = 0; k < item.length; k++) {
+    item[k].style.display = "none";
+  }
+  if (num == "All") {
+    num = item.length;
+  }
+  for (let j = 0; j < num; j++) {
+    item[j].style.display = "block";
+  }
+}
 
 function favoriteSearch() {
   resultsCard.classList.add("hidden");
@@ -194,7 +227,7 @@ function favoriteSearch() {
   favoriteShow.style.display = "block";
   drinkList.innerHTML = "";
 }
-
+``;
 function mainSearchInit() {
   favoriteShow.style.display = "none";
   mainShow.style.display = "block";
@@ -235,14 +268,14 @@ let saveCocktail = function (name) {
   loadCocktails();
 };
 
-//* CODE CHUNK STARTS ⤵️: This function block deletes a cocktail name in local storage.
+// Function to delete a cocktail name in local storage.
 let removeCocktail = function (name) {
   let flag = false; // This flag is used to check if the drink is already in local storage
   if (dataStorage) {
-    let index = dataStorage.indexOf(name); // This line finds the index of the cocktail name in local storage
+    let index = dataStorage.indexOf(name);
     if (index > -1) {
-      //*? only splice array when item is found
-      dataStorage.splice(index, 1); //*? 2nd parameter means remove one item only
+      //*! only splice array when item is found
+      dataStorage.splice(index, 1); //*! 2nd parameter means remove one item only
     }
     localStorage.setItem("cocktailName", JSON.stringify(dataStorage));
     alerts.innerHTML = `<div class="p-3 bg-green-300 border-green-900 text-green-700 font-bold rounded">Cocktail removed!</div>`;
@@ -254,7 +287,6 @@ let removeCocktail = function (name) {
   // This loads the cocktails again.
   loadCocktails();
 };
-//* CODE CHUNK ENDS ⤴️: This function block deletes a cocktail name in local storage.
 
 //* CODE CHUNK STARTS ⤵️: This function block displays all saved cocktails
 function loadCocktails() {
@@ -262,15 +294,15 @@ function loadCocktails() {
   if (dataStorage.length > 0) {
     // This if statement checks if there are any saved cocktails
     for (let i = 0; i < dataStorage.length; i++) {
-      saved.innerHTML += `<div class=" p-3 items-center>
+      saved.innerHTML += `<div class="lg:w-1/4 md:w-4/12 sm:w-1/2 p-3">
       <div class="bg-blue-500 rounded">
-          <button class="bg-[#4895EF] hover:bg-[#4361EE] py-1 px-7 font-bold text-white text-sm w-full h-14" onclick="getFavorites('${dataStorage[i]}')">${dataStorage[i]}</button>
-          <button class="bg-red-500 p-2 text-sm font-medium w-full hover:bg-red-600 text-white" onclick="removeCocktail('${dataStorage[i]}')">Remove</button>
+          <button class="bg-blue-500 rounded py-5 px-7 hover:bg-blue-600 font-bold text-white w-full" onclick="getFavorites('${dataStorage[i]}')">${dataStorage[i]}</button>
+          <button class="bg-red-500 p-2 text-sm font-medium rounded w-full hover:bg-red-600 text-white" onclick="removeCocktail('${dataStorage[i]}')">Remove</button>
       </div>
   </div>`;
     }
   } else {
-    saved.innerHTML += `<div class="lg:w-1/4 md:w-4/12 sm:w-1/2 p-3 text-white">
+    saved.innerHTML += `<div class="lg:w-1/4 md:w-4/12 sm:w-1/2 p-3">
           No cocktails present!
       </div>`;
   }
@@ -290,6 +322,23 @@ function alphaDrink(letter) {
       .then((response) => response.json())
       .then((data) => displayData(data, i));
   }
+  let num = 0;
+  let limit = 20;
+  totalText.innerHTML = ``;
+  filter.innerHTML = `<option value="All" selected>All</option>`;
+  for (let a = 0; a <= limit; a += 10) {
+    if (a > limit || a + 10 > limit) {
+      num = limit;
+    } else if (a == 0) {
+      num = 5;
+    } else {
+      num = a;
+    }
+    filter.innerHTML += `<option value="${num}">${num}</option>`;
+  }
+  document.getElementById("filter-cont").style.display = "flex"; //*! This line displays the filter
+  filter.style.display = "block";
+  totalText.innerHTML = `${limit} Drinks Found!`;
 }
 
 /*CODE BLOCK ENDS ⤴️: *************** This code block fetches list of cocktails by alphabet letter *************** :⤴️ CODE BLOCK ENDS*/
@@ -297,11 +346,16 @@ function alphaDrink(letter) {
 /*CODE BLOCK STARTS ⤵️: *************** This code block contains event listeners *************** :⤵️ CODE BLOCK STARTS*/
 
 // EVENT LISTENERS
+// init
 
 //* CODE CHUNK STARTS ⤵️: This function block listens for a click on the Get Random Cocktail button
 randomBtn.addEventListener("click", function () {
   drinkList.innerHTML = "";
-  for (let i = 0; i < 1; i++) {
+  let limit = 1;
+  document.getElementById("filter-cont").style.display = "none"; //*! This line hides the filter
+  filter.style.display = "none";
+  totalText.innerHTML = ``;
+  for (let i = 0; i < limit; i++) {
     randomCocktail();
   }
 });
@@ -309,13 +363,13 @@ randomBtn.addEventListener("click", function () {
 
 //* CODE CHUNK STARTS ⤵️: This function block listens for a click on the Clear Favorites button
 clearBtn.addEventListener("click", function () {
-  localStorage.removeItem("cocktailName"); // This line removes the cocktailName key from local storage
+  localStorage.removeItem("cocktailName");
   dataStorage = [];
   localStorage.setItem("cocktailName", JSON.stringify(dataStorage));
   // saved.innerHTML = "";
   drinkList.innerHTML = "";
   resultsCard.classList.add("hidden");
-  loadCocktails(); // This line loads the cocktails again
+  loadCocktails();
 });
 //* CODE CHUNK ENDS ⤴️: This function block listens for a click on the Clear Favorites button
 
