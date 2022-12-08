@@ -188,7 +188,7 @@ function displayData(data, i = 0) {
 
   //* CODE CHUNK STARTS ⤵️: This function block prints the ingredients + measurement + instructions + image data  (with save button) to the screen
   if (drink.strInstructions !== undefined) {
-    instructionsData = `<p class="px-2 pb-2 text-sm"><b>Instructions</b>: ${drink.strInstructions}</p>`;
+    instructionsData = `<p class="px-2 pb-2 text-sm w-[380px] text-justify"><b>Instructions</b>: ${drink.strInstructions}</p>`;
   } else {
     instructionsData = "";
   }
@@ -196,7 +196,6 @@ function displayData(data, i = 0) {
   <div class="flex flex-col items-center">
   <h4 class="font-bold text-lg p-1">${drink.strDrink}</h4>
   <p><img class="border border-[#3F37C9] m-1 mb-2" height="200" width="200" src="${drink.strDrinkThumb}"></p> 
-  
   ${ingredientsData}
   </div>
   <br>
