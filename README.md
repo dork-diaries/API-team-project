@@ -26,8 +26,7 @@ Simply set your search parameter via the dropdown and search away! Click "get ra
 
 [![Live Site](https://img.shields.io/badge/Live%20site-Click-success)](https://dork-diaries.github.io/API-team-project/)
 
-<video src="./assets/images/SiteDemo.mp4" controls="controls" style="max-width: 730px;">
-</video>
+![site demo](./assets/images/sitedemo.gif)
 
 ### <span  style="color:#D76794">Credits</span>
 
