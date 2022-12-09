@@ -41,27 +41,23 @@ function mainSearch(event) {
   drinkList.innerHTML = "";
   let queryParam = dropdownChoice.value === "cocktail" ? `search.php?s=${searchInput.value}` : `filter.php?i=${searchInput.value}`;
   let requestUrl = `${baseUrl}${queryParam}`;
-  console.log(requestUrl);
   fetch(requestUrl)
     .then(function (response) {
       let rtnData;
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.indexOf("application/json") !== -1) {
         rtnData = response.json();
-        // console.log(rtnData);
         if (rtnData.drinks !== null) {
           return rtnData; // This returns the data if it is not null
         } else {
           return null;
         }
       } else {
-        console.log(0);
         return null;
       }
     })
     .then(function (data) {
       let idUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="; // This is the base url for the drink id
-      // console.log(data);
       let indexes = [];
 
       if (data === null || data.drinks === null) {
@@ -141,7 +137,6 @@ function getFavorites(id) {
 // This loop returns a random drink from an array of drinks along with the drink's ingredients paired with measurements, image, and instructions
 function displayData(data, i = 0) {
   resultsCard.classList.remove("hidden");
-  // console.log(data);
   let drink = data.drinks[i]; // This is the drink object
   let ingredients = []; // This is the array of ingredients
   let measures = []; // This is the array of measurements
@@ -398,7 +393,6 @@ function open_menu() {
   menu_open.style.display = "none";
   menu_close.style.display = "block";
   menu.style.display = "flex";
-  console.log(1);
 }
 function close_menu() {
   menu_close.style.display = "none";
