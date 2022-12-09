@@ -35,10 +35,10 @@ function randomCocktail() {
 }
 //* CODE CHUNK ENDS ⤴️: This function block fetches a random drink from an array of drinks
 
-function mainSearch(event) {
-  event.preventDefault();
+function mainSearch() {
   resultsCard.classList.remove("hidden");
   drinkList.innerHTML = "";
+  alerts.innerHTML = "";
   let queryParam = dropdownChoice.value === "cocktail" ? `search.php?s=${searchInput.value}` : `filter.php?i=${searchInput.value}`;
   let requestUrl = `${baseUrl}${queryParam}`;
   fetch(requestUrl)
@@ -122,6 +122,7 @@ function mainSearch(event) {
 function getFavorites(id) {
   // This function fetches drinks by ID, then saves to favorites
   drinkList.innerHTML = "";
+  alerts.innerHTML = "";
   //*! This hides the drink to the favorites list
   document.getElementById("filter-cont").style.display = "none";
   filter.style.display = "none";
@@ -187,7 +188,7 @@ function displayData(data, i = 0) {
   } else {
     instructionsData = "";
   }
-  drinkList.innerHTML += `<div class="border-2 border-[#3F37C9] bg-glass-inner my-2 flex flex-col items-center item w-[300px] m-0 m-auto">
+  drinkList.innerHTML += `<div class="border-2 border-[#3F37C9] bg-glass-inner my-2 flex flex-col items-center item m-0 m-auto w-full">
   <div class="flex flex-col items-center">
   <h4 class="font-bold text-lg p-1">${drink.strDrink}</h4>
   <p><img class="border border-[#3F37C9] m-1 mb-2" height="200" width="200" src="${drink.strDrinkThumb}"></p> 
@@ -225,12 +226,14 @@ function favoriteSearch() {
   mainShow.style.display = "none";
   favoriteShow.style.display = "block";
   drinkList.innerHTML = "";
+  alerts.innerHTML = "";
 }
 
 function mainSearchInit() {
   favoriteShow.style.display = "none";
   mainShow.style.display = "block";
   drinkList.innerHTML = "";
+  alerts.innerHTML = "";
 }
 
 // Grabs all past cocktails
@@ -349,6 +352,7 @@ function alphaDrink(letter) {
 //* CODE CHUNK STARTS ⤵️: This function block listens for a click on the Get Random Cocktail button
 randomBtn.addEventListener("click", function () {
   drinkList.innerHTML = "";
+  alerts.innerHTML = "";
   let limit = 1;
   document.getElementById("filter-cont").style.display = "none"; //*! This line hides the filter
   filter.style.display = "none";
@@ -366,16 +370,24 @@ clearBtn.addEventListener("click", function () {
   localStorage.setItem("cocktailName", JSON.stringify(dataStorage));
   // saved.innerHTML = "";
   drinkList.innerHTML = "";
+  alerts.innerHTML = "";
   resultsCard.classList.add("hidden");
   loadCocktails(); //*! This line loads the cocktails again
 });
 //* CODE CHUNK ENDS ⤴️: This function block listens for a click on the Clear Favorites button
 
-searchForm.addEventListener("submit", mainSearch); // This event listener searches for cocktails
-
+searchForm.addEventListener("submit", function (e) {
+  if (searchInput.value == '') {
+    alerts.innerHTML = `<div class="p-3 bg-red-300 border-red-900 text-red-700 font-bold rounded">No entry detected. Please enter a name!</div>`;
+  }else{
+    mainSearch();
+  }
+  e.preventDefault();
+});
 //* CODE CHUNK STARTS ⤵️: This function block listens for a click on the alphabet buttons
 alphabets.addEventListener("change", function () {
   drinkList.innerHTML = "";
+  alerts.innerHTML = "";
   mainSearchInit();
   // This event listener searches for cocktails by alphabet
   let letter = alphabets.value;
