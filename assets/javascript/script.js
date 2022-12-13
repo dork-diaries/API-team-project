@@ -121,9 +121,11 @@ function mainSearch() {
 //* CODE CHUNK STARTS ⤵️: This function fetches drinks by ID, then saves to favorites
 function getFavorites(id) {
   // This function fetches drinks by ID, then saves to favorites
+  // This clears the previous results data and alerts.
   drinkList.innerHTML = "";
   alerts.innerHTML = "";
   //*! This hides the drink to the favorites list
+  // Hides filter div.
   document.getElementById("filter-cont").style.display = "none";
   filter.style.display = "none";
   totalText.innerHTML = ``;
@@ -137,12 +139,15 @@ function getFavorites(id) {
 
 // This loop returns a random drink from an array of drinks along with the drink's ingredients paired with measurements, image, and instructions
 function displayData(data, i = 0) {
+  // Get the data
+  // Show the results card
   resultsCard.classList.remove("hidden");
   let drink = data.drinks[i]; // This is the drink object
   let ingredients = []; // This is the array of ingredients
   let measures = []; // This is the array of measurements
   let ingredientsData, instructionsData, portions;
   //* CODE CHUNK STARTS ⤵️: This function block pints the ingredients data from an array of drinks
+  // If ingredients are present then it will put them in an array.
   for (let k = 1; k <= 15; k++) {
     if (drink[`strIngredient${k}`] != null && drink[`strIngredient${k}`] != undefined && `strIngredient${k}` in drink) {
       ingredients.push(drink[`strIngredient${k}`]);
@@ -155,6 +160,7 @@ function displayData(data, i = 0) {
   //* CODE CHUNK STARTS ⤵️: This function block pints the measurement data from an array of drinks
   for (let a = 1; a <= 15; a++) {
     // This loop prints the measurement data from an array of drinks
+    // If measurements are present it will put them in another array.
     if (`strIngredient${a}` in drink && drink[`strMeasure${a}`] != null && drink[`strMeasure${a}`] != "") {
       measures.push(drink[`strMeasure${a}`]);
     } else {
@@ -164,7 +170,7 @@ function displayData(data, i = 0) {
   //* CODE CHUNK ENDS ⤴️: This function block pints the measurement data from an array of drinks
 
   //* CODE CHUNK STARTS ⤵️: This function block concatenates ingredients + measurement data from an array of drinks
-
+// Here it will combine measurements and ingredients and put them in an <ul> and save it in a variable
   portions = `<ul class="list-disc list-inside p-1 text-sm">`; // This line opens the <ul> tag
   for (let b = 0; b < ingredients.length; b++) {
     // This loop concatenates ingredients + measurement data from an array of drinks
@@ -183,11 +189,13 @@ function displayData(data, i = 0) {
   //* CODE CHUNK ENDS ⤴️: This function block concatenates ingredients + measurement data from an array of drinks
 
   //* CODE CHUNK STARTS ⤵️: This function block prints the ingredients + measurement + instructions + image data  (with save button) to the screen
+  // If instructions are not empty then it will show them in a paragraph and save it in a variable.
   if (drink.strInstructions !== undefined) {
     instructionsData = `<p class="px-2 pb-2 text-sm"><b>Instructions</b>: ${drink.strInstructions}</p>`;
   } else {
     instructionsData = "";
   }
+  // This is the whole div where it shows all the variables for the Ingredients and measurements list and instructions and also the image and name.
   drinkList.innerHTML += `<div class="border-2 border-[#3F37C9] bg-glass-inner my-2 flex flex-col items-center item m-0 m-auto w-full">
   <div class="flex flex-col items-center">
   <h4 class="font-bold text-lg p-1">${drink.strDrink}</h4>
@@ -254,12 +262,12 @@ let saveCocktail = function (name) {
     // This if statement checks if the drink is already in local storage
     dataStorage.push(name);
     localStorage.setItem("cocktailName", JSON.stringify(dataStorage));
-    alerts.innerHTML = `<div class="p-3 bg-green-300 border-green-900 text-green-700 font-bold rounded">Cocktails saved!</div>`;
+    alerts.innerHTML = `<div class="p-3 bg-green-300 border-green-900 text-green-700 font-bold rounded">Cocktail saved!</div>`;
     setTimeout(() => {
       alerts.innerHTML = "";
     }, 3000); // This line clears the alerts after 3 seconds
   } else {
-    alerts.innerHTML = `<div class="p-3 bg-red-300 border-red-900 text-red-700 font-bold rounded">Cocktails already present!</div>`;
+    alerts.innerHTML = `<div class="p-3 bg-red-300 border-red-900 text-red-700 font-bold rounded">Cocktail already saved!</div>`;
     setTimeout(() => {
       alerts.innerHTML = "";
     }, 3000); // This line clears the alerts after 3 seconds
