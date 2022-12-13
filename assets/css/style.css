@@ -167,3 +167,9 @@ nav ul>li:hover .neon-text {
         font-size: 30px;
     }
 }
+
+#alert{
+    position: fixed;
+    z-index: 999;
+    top: 75px;
+}
